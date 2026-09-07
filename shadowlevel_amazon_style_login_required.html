@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090711">
+<title>ShadowLevel — Store</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#07060c;--card:#11101a;--card2:#171522;--text:#f7f5ff;--muted:#aaa5bb;--purple:#9b5cff;--cyan:#28e6ff;--line:#292638}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+button,input{font:inherit}
+button{cursor:pointer}
+#stars{position:fixed;inset:0;z-index:-3;overflow:hidden;background:radial-gradient(circle at 20% 10%,#24143f 0,transparent 32%),radial-gradient(circle at 90% 20%,#102c3a 0,transparent 30%),#07060c}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.55;animation:twinkle 3s infinite ease-in-out}
+@keyframes twinkle{50%{opacity:.12;transform:scale(.4)}}
+.orb{position:absolute;border-radius:50%;filter:blur(45px);opacity:.25;animation:float 9s ease-in-out infinite}
+.o1{width:220px;height:220px;background:#8b3dff;left:-70px;top:20%;}.o2{width:260px;height:260px;background:#00d9ff;right:-100px;top:55%;animation-delay:-3s}
+@keyframes float{50%{transform:translate(35px,-30px) scale(1.1)}}
+#login{min-height:100vh;display:grid;place-items:center;padding:24px}
+.login-box{width:min(430px,100%);padding:34px;border:1px solid #3a3152;background:rgba(12,10,19,.75);backdrop-filter:blur(22px);border-radius:28px;box-shadow:0 25px 100px #0008,0 0 50px #7b35ff22;animation:rise .8s ease}
+@keyframes rise{from{opacity:0;transform:translateY(35px) scale(.96)}to{opacity:1;transform:none}}
+.logo{font-size:28px;font-weight:900;letter-spacing:-1px}.logo span{color:var(--cyan)}
+.tag{color:var(--muted);margin:8px 0 28px}
+.field{margin:13px 0}.field label{display:block;color:#c7c2d6;font-size:13px;margin-bottom:7px}
+.field input{width:100%;padding:14px 15px;border-radius:13px;border:1px solid var(--line);background:#090811;color:white;outline:none}
+.field input:focus{border-color:var(--purple);box-shadow:0 0 0 3px #9b5cff18}
+.login-btn,.buy{border:0;color:white;background:linear-gradient(100deg,#7e35ff,#13cfe8);font-weight:800}
+.login-btn{width:100%;padding:15px;border-radius:14px;margin-top:12px;box-shadow:0 12px 30px #5c29a944}
+.demo{font-size:12px;color:#777287;text-align:center;margin-top:15px}
+#store{display:none;min-height:100vh;animation:storeIn .8s ease}
+@keyframes storeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+header{position:sticky;top:0;z-index:10;background:rgba(7,6,12,.82);backdrop-filter:blur(18px);border-bottom:1px solid #24212f}
+.nav{max-width:1250px;margin:auto;display:flex;align-items:center;gap:18px;padding:14px 20px}
+.brand{white-space:nowrap}.brand b{font-size:23px}.brand b span{color:var(--cyan)}
+.search{flex:1;position:relative}.search input{width:100%;padding:13px 45px 13px 16px;border:1px solid var(--line);border-radius:13px;background:#11101a;color:white;outline:none}.search-icon{position:absolute;right:15px;top:11px}
+.nav-btn{background:#151320;color:white;border:1px solid var(--line);border-radius:12px;padding:11px 14px}
+.cart-count{background:var(--cyan);color:#001015;border-radius:99px;padding:1px 6px;font-size:11px;font-weight:900}
+.hero{max-width:1250px;margin:auto;padding:70px 20px 35px;display:grid;grid-template-columns:1.25fr .75fr;gap:25px;align-items:center}
+.hero h1{font-size:clamp(42px,7vw,78px);line-height:.93;letter-spacing:-4px}
+.hero h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 35px #28e6ff55}
+.hero p{color:var(--muted);font-size:17px;max-width:620px;margin:22px 0}
+.pills{display:flex;flex-wrap:wrap;gap:9px}.pill{padding:9px 13px;border:1px solid #332c45;border-radius:99px;background:#100e18;color:#cbc6d5;font-size:13px}
+.hero-art{height:300px;border:1px solid #332c45;border-radius:30px;background:linear-gradient(145deg,#171124,#0b1720);display:grid;place-items:center;position:relative;overflow:hidden;box-shadow:inset 0 0 60px #7c42ff18}
+.phone{width:155px;height:270px;border:5px solid #686174;border-radius:28px;background:linear-gradient(145deg,#17233c,#05070d);box-shadow:0 0 55px #28e6ff33;transform:rotate(-7deg);animation:phone 4s ease-in-out infinite}
+.phone:before{content:"";display:block;width:65px;height:18px;border-radius:0 0 14px 14px;background:#05050a;margin:auto}
+@keyframes phone{50%{transform:rotate(4deg) translateY(-10px)}}
+.categories{max-width:1250px;margin:auto;padding:10px 20px 20px;display:flex;gap:10px;overflow:auto}.cat{white-space:nowrap;padding:11px 17px;border:1px solid var(--line);border-radius:12px;background:#11101a;color:#ddd8e8}.cat.active,.cat:hover{border-color:var(--purple);background:#1a1428}
+.wrap{max-width:1250px;margin:auto;padding:20px}.section-title{display:flex;justify-content:space-between;align-items:center;margin:18px 0}.section-title h2{font-size:26px}.section-title span{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.product{background:linear-gradient(180deg,#15131e,#0f0e16);border:1px solid #282536;border-radius:19px;overflow:hidden;transition:.25s;position:relative}
+.product:hover{transform:translateY(-6px);border-color:#5b487c;box-shadow:0 18px 45px #0007}
+.pic{height:220px;background:radial-gradient(circle at 50% 40%,#29223d,transparent 60%),#0c0b12;display:grid;place-items:center;overflow:hidden}
+.pic img{width:100%;height:100%;object-fit:contain;padding:18px;filter:drop-shadow(0 14px 18px #0008);transition:.3s}.product:hover .pic img{transform:scale(1.06)}
+.info{padding:15px}.type{font-size:11px;color:var(--cyan);text-transform:uppercase;letter-spacing:1px}.name{font-weight:800;margin:6px 0}.rating{font-size:12px;color:#ffd66b}.price{font-size:20px;font-weight:900;margin:8px 0 12px}.old{text-decoration:line-through;color:#777;margin-left:7px;font-size:12px;font-weight:500}.buy{width:100%;padding:11px;border-radius:11px}.badge{position:absolute;top:10px;left:10px;padding:5px 8px;background:#28e6ff;color:#001015;font-size:10px;font-weight:900;border-radius:7px;z-index:2}
+.empty{display:none;text-align:center;color:var(--muted);padding:50px}
+footer{margin-top:60px;border-top:1px solid #24212f;padding:35px 20px;color:#777287;text-align:center}
+#toast{position:fixed;right:18px;bottom:18px;background:#171522;border:1px solid #423653;padding:13px 16px;border-radius:13px;box-shadow:0 15px 50px #0009;transform:translateY(100px);opacity:0;transition:.3s;z-index:30}#toast.show{transform:none;opacity:1}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr}.hero-art{height:220px}}
+@media(max-width:650px){.nav{flex-wrap:wrap;padding:10px 12px}.brand{order:0}.nav-btn{order:1;margin-left:auto}.search{order:2;flex-basis:100%}.hero{padding:45px 14px 20px}.hero h1{letter-spacing:-2px}.hero p{font-size:15px}.hero-art{display:none}.categories{padding-left:14px}.wrap{padding:12px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.pic{height:165px}.info{padding:11px}.name{font-size:14px}.price{font-size:17px}.buy{padding:10px;font-size:13px}.login-box{padding:27px 21px}}
+@media(max-width:390px){.grid{grid-template-columns:1fr}.pic{height:210px}}
+
+.quick-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 25px}
+.quick-strip>div{padding:15px;border:1px solid #282536;background:#11101a;border-radius:14px}
+.quick-strip b{display:block;font-size:14px}.quick-strip small{color:#888396;display:block;margin-top:4px}
+.toolbar{display:flex;align-items:end;justify-content:space-between;gap:15px}.sorts{display:flex;gap:7px;flex-wrap:wrap}.sorts button{background:#11101a;border:1px solid #2b2738;color:#cfc9dc;border-radius:9px;padding:8px 10px}
+.actions{display:grid;grid-template-columns:1fr 42px;gap:7px}.wish{border:1px solid #383246;background:#171522;color:#fff;border-radius:10px;font-size:19px}.wish.active{color:#ff5c9a}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:50;align-items:center;justify-content:center;padding:18px}
+.modal.show{display:flex}.modal-box{width:min(700px,100%);max-height:90vh;overflow:auto;background:#11101a;border:1px solid #3b3450;border-radius:22px;padding:24px;position:relative;box-shadow:0 30px 100px #000}
+.close{position:absolute;right:15px;top:12px;background:none;border:0;color:#aaa;font-size:28px}
+.modal h2{margin-bottom:12px}.modal p,.modal li{color:#aaa5bb;line-height:1.6}.modal .checkout{margin-top:18px;padding:13px 18px;border:0;border-radius:11px;background:linear-gradient(100deg,#7e35ff,#13cfe8);color:#fff;font-weight:800}
+.detail-grid{display:grid;grid-template-columns:260px 1fr;gap:20px}.detail-grid img{width:100%;height:260px;object-fit:contain;background:#0c0b12;border-radius:15px}
+.review{padding:12px;border:1px solid #282536;border-radius:12px;margin-top:10px}.stars{color:#ffd66b}
+@media(max-width:700px){.quick-strip{grid-template-columns:repeat(2,1fr)}.toolbar{display:block}.sorts{margin-bottom:12px}.detail-grid{grid-template-columns:1fr}.detail-grid img{height:220px}}
+</style>
+</head>
+<body>
+<div id="stars"></div><div class="orb o1"></div><div class="orb o2"></div>
+
+<section id="login">
+  <div class="login-box">
+    <div class="logo">SHADOW<span>LEVEL</span></div>
+    <div class="tag">Next-level shopping. One place.</div>
+    <div class="field"><label>Email</label><input id="email" type="email" placeholder="you@example.com"></div>
+    <div class="field"><label>Password</label><input id="password" type="password" placeholder="••••••••"></div>
+    <button class="login-btn" onclick="enterStore()">Enter ShadowLevel →</button>
+    <div class="demo">Email and password are required to enter</div>
+  </div>
+</section>
+
+<section id="store">
+<header>
+  <div class="nav">
+    <div class="brand"><b>SHADOW<span>LEVEL</span></b></div>
+    <div class="search"><input id="search" oninput="filterProducts()" placeholder="Search phones, pens, laptops, headphones..."><span class="search-icon">⌕</span></div>
+    <button class="nav-btn" onclick="showOrders()">📦 Orders</button>
+    <button class="nav-btn" onclick="showWishlist()">♡ <span id="wishCount">0</span></button>
+    <button class="nav-btn" onclick="showCart()">🛒 <span class="cart-count" id="cartCount">0</span></button>
+  </div>
+</header>
+
+<div class="hero">
+  <div>
+    <div class="pills"><span class="pill">⚡ New arrivals</span><span class="pill">📦 Fast delivery</span><span class="pill">🔒 Secure demo</span></div>
+    <h1>SHOP THE<br><em>LEVEL.</em></h1>
+    <p>Phones, technology, gaming, audio and stationery — built into one futuristic ShadowLevel storefront.</p>
+  </div>
+  <div class="hero-art"><div class="phone"></div></div>
+</div>
+
+<div class="categories">
+<button class="cat active" onclick="setCategory('all',this)">All</button>
+<button class="cat" onclick="setCategory('phones',this)">📱 Phones</button>
+<button class="cat" onclick="setCategory('laptops',this)">💻 Laptops</button>
+<button class="cat" onclick="setCategory('audio',this)">🎧 Audio</button>
+<button class="cat" onclick="setCategory('gaming',this)">🎮 Gaming</button>
+<button class="cat" onclick="setCategory('stationery',this)">🖊️ Stationery</button>
+<button class="cat" onclick="setCategory('accessories',this)">🔌 Accessories</button>
+<button class="cat" onclick="setCategory('fashion',this)">👕 Fashion</button>
+<button class="cat" onclick="setCategory('home',this)">🏠 Home</button>
+<button class="cat" onclick="setCategory('sports',this)">⚽ Sports</button>
+</div>
+
+<main class="wrap">
+<div class="quick-strip">
+  <div><b>⚡ Today's Deals</b><small>Limited-time offers</small></div>
+  <div><b>🚚 Fast Delivery</b><small>Demo delivery tracker</small></div>
+  <div><b>↩ Easy Returns</b><small>30-day demo policy</small></div>
+  <div><b>🔐 Secure Checkout</b><small>Demo payment flow</small></div>
+</div>
+<div class="toolbar">
+  <div class="section-title"><h2>Featured products</h2><span id="resultText">8 products</span></div>
+  <div class="sorts">
+    <button onclick="sortProducts('rating')">Top rated</button>
+    <button onclick="sortProducts('priceLow')">Price: low</button>
+    <button onclick="sortProducts('priceHigh')">Price: high</button>
+    <button onclick="sortProducts('discount')">Best deals</button>
+  </div>
+</div>
+<div class="grid" id="grid"></div>
+<div class="empty" id="empty">No products found.</div>
+</main>
+<footer>© 2026 ShadowLevel • Demo storefront • Product prices are for demonstration.</footer>
+</section>
+
+<div id="toast"></div>
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal()">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+const products=[
+{name:"iPhone 16",type:"Phones",cat:"phones",price:69999,old:79999,rating:5,badge:"HOT",img:"https://images.unsplash.com/photo-1592286927505-2fd0b6f7f0f1?auto=format&fit=crop&w=700&q=80"},
+{name:"Samsung Galaxy S25",type:"Phones",cat:"phones",price:74999,old:84999,rating:5,badge:"NEW",img:"https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=700&q=80"},
+{name:"Google Pixel",type:"Phones",cat:"phones",price:59999,old:69999,rating:4,img:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=700&q=80"},
+{name:"MacBook Air",type:"Laptops",cat:"laptops",price:89990,old:99990,rating:5,badge:"TOP",img:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=700&q=80"},
+{name:"Windows Laptop",type:"Laptops",cat:"laptops",price:54990,old:64990,rating:4,img:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=80"},
+{name:"Wireless Headphones",type:"Audio",cat:"audio",price:4999,old:7999,rating:4,img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=80"},
+{name:"Wireless Earbuds",type:"Audio",cat:"audio",price:2499,old:3999,rating:4,badge:"DEAL",img:"https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=700&q=80"},
+{name:"Gaming Controller",type:"Gaming",cat:"gaming",price:3499,old:4999,rating:5,img:"https://images.unsplash.com/photo-1605901309584-818e25960a8f?auto=format&fit=crop&w=700&q=80"},
+{name:"Mechanical Keyboard",type:"Gaming",cat:"gaming",price:3999,old:5999,rating:5,img:"https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=700&q=80"},
+{name:"Pilot V5 Roller Ball",type:"Stationery",cat:"stationery",price:90,old:110,rating:5,badge:"BEST",img:"https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=700&q=80"},
+{name:"Pilot V7 Roller Ball",type:"Stationery",cat:"stationery",price:100,old:120,rating:5,img:"https://images.unsplash.com/photo-1568205612837-017257d2310b?auto=format&fit=crop&w=700&q=80"},
+{name:"Notebook",type:"Stationery",cat:"stationery",price:199,old:299,rating:4,img:"https://images.unsplash.com/photo-1531346680769-a1d79b57de5b?auto=format&fit=crop&w=700&q=80"},
+{name:"USB-C Fast Charger",type:"Accessories",cat:"accessories",price:1299,old:1999,rating:4,img:"https://images.unsplash.com/photo-1625842268584-8f3296236761?auto=format&fit=crop&w=700&q=80"},
+{name:"Smart Watch",type:"Wearables",cat:"accessories",price:3999,old:5999,rating:4,img:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80"},
+{name:"Backpack",type:"Fashion",cat:"fashion",price:1499,old:2499,rating:4,img:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=80"},
+{name:"Desk Lamp",type:"Home",cat:"home",price:999,old:1499,rating:4,img:"https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=700&q=80"},
+{name:"Coffee Mug",type:"Kitchen",cat:"home",price:399,old:599,rating:5,img:"https://images.unsplash.com/photo-1514228742587-6b1558fcf93a?auto=format&fit=crop&w=700&q=80"},
+{name:"Sports Bottle",type:"Sports",cat:"sports",price:599,old:899,rating:4,img:"https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=700&q=80"}
+];
+let category="all",cart=0,wishlist=new Set(),orders=[],sortMode="default";
+function money(n){return "₹"+n.toLocaleString("en-IN")}
+function stars(n){return "★".repeat(n)+"☆".repeat(5-n)}
+function getList(){
+ const q=document.getElementById("search").value.toLowerCase();
+ let list=products.filter(p=>(category==="all"||p.cat===category)&&(`${p.name} ${p.type}`.toLowerCase().includes(q)));
+ if(sortMode==="priceLow")list.sort((a,b)=>a.price-b.price);
+ if(sortMode==="priceHigh")list.sort((a,b)=>b.price-a.price);
+ if(sortMode==="rating")list.sort((a,b)=>b.rating-a.rating);
+ if(sortMode==="discount")list.sort((a,b)=>(b.old-b.price)/b.old-(a.old-a.price)/a.old);
+ return list;
+}
+function render(){
+ const list=getList();
+ document.getElementById("grid").innerHTML=list.map((p)=>`
+ <article class="product">
+ ${p.badge?`<span class="badge">${p.badge}</span>`:""}
+ <div class="pic"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
+ <div class="info"><div class="type">${p.type}</div><div class="name">${p.name}</div>
+ <div class="rating">${stars(p.rating)} <small>(${Math.floor(25+p.rating*17)})</small></div>
+ <div class="price">${money(p.price)}<span class="old">${money(p.old)}</span></div>
+ <div class="actions"><button class="buy" onclick="addCart('${p.name}')">Add to cart</button><button class="wish ${wishlist.has(p.name)?"active":""}" onclick="toggleWish('${p.name}')">♡</button></div>
+ <button class="buy" style="margin-top:7px;background:#171522;border:1px solid #3a3348" onclick="details('${p.name}')">View details</button>
+ </div></article>`).join("");
+ document.getElementById("empty").style.display=list.length?"none":"block";
+ document.getElementById("resultText").textContent=`${list.length} product${list.length===1?"":"s"}`;
+}
+function enterStore(){
+ const email=document.getElementById("email");
+ const password=document.getElementById("password");
+ email.setCustomValidity("");
+ password.setCustomValidity("");
+ if(!email.value.trim()){
+   email.setCustomValidity("Please enter your email.");
+   email.reportValidity(); email.focus(); return;
+ }
+ if(!email.checkValidity()){
+   email.setCustomValidity("Please enter a valid email address.");
+   email.reportValidity(); email.focus(); return;
+ }
+ if(!password.value){
+   password.setCustomValidity("Please enter your password.");
+   password.reportValidity(); password.focus(); return;
+ }
+ document.getElementById("login").style.display="none";
+ document.getElementById("store").style.display="block";
+ window.scrollTo(0,0); render();
+}
+function setCategory(c,el){category=c;document.querySelectorAll(".cat").forEach(x=>x.classList.remove("active"));el.classList.add("active");render()}
+function filterProducts(){render()}
+function sortProducts(s){sortMode=s;render()}
+function addCart(name){cart++;document.getElementById("cartCount").textContent=cart;toast(`✓ ${name} added to cart`)}
+function toggleWish(name){wishlist.has(name)?wishlist.delete(name):wishlist.add(name);document.getElementById("wishCount").textContent=wishlist.size;render()}
+function details(name){
+ const p=products.find(x=>x.name===name);
+ openModal(`<div class="detail-grid"><img src="${p.img}" alt="${p.name}"><div><div class="type">${p.type}</div><h2>${p.name}</h2><div class="stars">${stars(p.rating)}</div><h2>${money(p.price)} <s style="color:#777;font-size:14px">${money(p.old)}</s></h2><p>Demo product page with specifications, seller information, delivery estimate, offers and customer reviews.</p><p><b>🚚 Delivery:</b> Eligible for fast demo delivery</p><p><b>✓ Seller:</b> ShadowLevel Marketplace</p><p><b>↩ Returns:</b> Easy demo returns</p><button class="checkout" onclick="addCart('${p.name}');closeModal()">Add to cart</button></div></div><div class="review"><b>Customer reviews</b><p>“Great product and fast delivery.” <span class="stars">★★★★★</span></p></div>`);
+}
+function showCart(){
+ openModal(`<h2>🛒 Shopping Cart</h2><p>You currently have <b>${cart}</b> item${cart===1?"":"s"} in your demo cart.</p><button class="checkout" onclick="checkout()">Proceed to checkout</button>`);
+}
+function checkout(){
+ orders.unshift({id:"SL"+Date.now().toString().slice(-6),date:new Date().toLocaleDateString("en-IN"),status:"Confirmed"});
+ cart=0;document.getElementById("cartCount").textContent=0;
+ openModal(`<h2>✓ Order placed</h2><p>Your demo order has been confirmed.</p><p><b>Order ID:</b> ${orders[0].id}</p><p><b>Status:</b> Preparing for shipment</p>`);
+}
+function showOrders(){
+ openModal(`<h2>📦 Your Orders</h2>${orders.length?orders.map(o=>`<div class="review"><b>${o.id}</b><p>${o.date} • ${o.status}</p><button class="checkout" onclick="trackOrder('${o.id}')">Track order</button></div>`).join(""):"<p>No demo orders yet.</p>"}`);
+}
+function trackOrder(id){openModal(`<h2>📍 Track ${id}</h2><div class="review"><p>✓ Order confirmed</p><p>✓ Packed</p><p>• Out for delivery</p><p>○ Delivered</p></div>`)}
+function showWishlist(){openModal(`<h2>♡ Wishlist</h2>${wishlist.size?[...wishlist].map(x=>`<div class="review"><b>${x}</b></div>`).join(""):"<p>Your wishlist is empty.</p>"}`)}
+function openModal(content){document.getElementById("modalContent").innerHTML=content;document.getElementById("modal").classList.add("show")}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+function toast(msg){let t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove("show"),2200)}
+for(let i=0;i<100;i++){let s=document.createElement("i");s.className="star";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.animationDelay=Math.random()*3+"s";document.getElementById("stars").appendChild(s)}
+</script>
+</body>
+</html>
