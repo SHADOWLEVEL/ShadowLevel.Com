@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ShadowLevel | Stationery</title>
+
+<style>
+
+/* =====================================================
+   SHADOWLEVEL
+   FUTURISTIC DARK STATIONERY THEME
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#07080d;
+    color:white;
+    overflow-x:hidden;
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+#loginPage{
+    height:100vh;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+
+    background:
+        radial-gradient(circle at 15% 20%,#5b21b6 0%,transparent 30%),
+        radial-gradient(circle at 85% 75%,#075985 0%,transparent 30%),
+        #05060a;
+}
+
+
+/* stars */
+
+.stars{
+    position:absolute;
+    inset:-200px;
+
+    background-image:
+        radial-gradient(circle,#ffffff 1px,transparent 1px),
+        radial-gradient(circle,#ffffff 1px,transparent 1px);
+
+    background-size:90px 90px,140px 140px;
+
+    background-position:0 0,50px 30px;
+
+    opacity:.16;
+
+    animation:moveStars 30s linear infinite;
+}
+
+@keyframes moveStars{
+
+    from{
+        transform:translate(0,0);
+    }
+
+    to{
+        transform:translate(400px,300px);
+    }
+}
+
+
+/* glowing orbs */
+
+.orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.45;
+}
+
+.orb1{
+    width:350px;
+    height:350px;
+    background:#7c3aed;
+    left:-120px;
+    top:-100px;
+
+    animation:orbOne 8s ease-in-out infinite alternate;
+}
+
+.orb2{
+    width:330px;
+    height:330px;
+    background:#06b6d4;
+    right:-100px;
+    bottom:-100px;
+
+    animation:orbTwo 9s ease-in-out infinite alternate;
+}
+
+.orb3{
+    width:220px;
+    height:220px;
+    background:#ec4899;
+    left:50%;
+    top:45%;
+
+    animation:orbThree 7s ease-in-out infinite alternate;
+}
+
+@keyframes orbOne{
+
+    to{
+        transform:translate(100px,80px) scale(1.2);
+    }
+}
+
+@keyframes orbTwo{
+
+    to{
+        transform:translate(-100px,-80px) scale(1.2);
+    }
+}
+
+@keyframes orbThree{
+
+    to{
+        transform:translate(-80px,50px) scale(1.3);
+    }
+}
+
+
+/* login card */
+
+.loginCard{
+
+    width:420px;
+    max-width:90%;
+
+    padding:45px;
+
+    position:relative;
+    z-index:5;
+
+    background:rgba(13,15,25,.70);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:28px;
+
+    backdrop-filter:blur(25px);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.6),
+        inset 0 1px rgba(255,255,255,.1);
+
+    animation:loginAppear 1s ease;
+}
+
+@keyframes loginAppear{
+
+    from{
+        opacity:0;
+        transform:translateY(40px) scale(.92);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+
+/* logo */
+
+.logo{
+
+    text-align:center;
+
+    font-size:36px;
+
+    font-weight:900;
+
+    letter-spacing:5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #a78bfa,
+            #22d3ee,
+            #ec4899,
+            #ffffff
+        );
+
+    background-size:300%;
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    animation:logoAnimation 5s linear infinite;
+}
+
+@keyframes logoAnimation{
+
+    to{
+        background-position:300%;
+    }
+}
+
+.loginSubtitle{
+
+    text-align:center;
+
+    color:#999fb4;
+
+    margin-top:10px;
+
+    margin-bottom:30px;
+}
+
+
+/* inputs */
+
+.input{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:14px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    background:rgba(255,255,255,.05);
+
+    color:white;
+
+    outline:none;
+
+    transition:.3s;
+}
+
+.input:focus{
+
+    border-color:#8b5cf6;
+
+    box-shadow:
+        0 0 25px rgba(139,92,246,.25);
+}
+
+
+/* login button */
+
+.loginButton{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    color:white;
+
+    font-weight:bold;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7c3aed,
+            #ec4899,
+            #06b6d4
+        );
+
+    background-size:200%;
+
+    animation:buttonGradient 4s linear infinite;
+
+    transition:.3s;
+}
+
+.loginButton:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(124,58,237,.4);
+}
+
+@keyframes buttonGradient{
+
+    to{
+        background-position:200%;
+    }
+}
+
+.demoText{
+
+    text-align:center;
+
+    color:#666c80;
+
+    font-size:12px;
+
+    margin-top:16px;
+}
+
+
+/* =====================================================
+   SHOP
+===================================================== */
+
+#shopPage{
+
+    display:none;
+
+    min-height:100vh;
+
+    background:#f4f5f8;
+
+    color:#111;
+}
+
+
+/* header */
+
+.header{
+
+    height:70px;
+
+    padding:0 30px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:22px;
+
+    background:#090a10;
+
+    color:white;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+
+    box-shadow:
+        0 4px 25px rgba(0,0,0,.25);
+}
+
+.shopLogo{
+
+    font-size:24px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    white-space:nowrap;
+}
+
+
+/* search */
+
+.search{
+
+    flex:1;
+
+    max-width:750px;
+
+    display:flex;
+
+    margin:auto;
+}
+
+.search input{
+
+    width:100%;
+
+    padding:13px 16px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:8px 0 0 8px;
+}
+
+.search button{
+
+    width:55px;
+
+    border:none;
+
+    background:#8b5cf6;
+
+    color:white;
+
+    border-radius:0 8px 8px 0;
+
+    cursor:pointer;
+}
+
+
+/* header links */
+
+.headerLink{
+
+    white-space:nowrap;
+
+    color:#ddd;
+
+    font-size:14px;
+}
+
+.cart{
+
+    position:relative;
+
+    font-size:22px;
+
+    cursor:pointer;
+}
+
+.cartCount{
+
+    position:absolute;
+
+    top:-11px;
+
+    right:-11px;
+
+    width:20px;
+
+    height:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#ef4444;
+
+    border-radius:50%;
+
+    font-size:11px;
+
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+
+    margin:22px;
+
+    min-height:330px;
+
+    padding:50px;
+
+    border-radius:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 85% 20%,
+            #06b6d4,
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 70% 100%,
+            #ec4899,
+            transparent 32%
+        ),
+
+        linear-gradient(
+            120deg,
+            #080910,
+            #2b2152,
+            #080910
+        );
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.18);
+}
+
+
+/* hero circles */
+
+.heroCircle{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.12);
+}
+
+.circle1{
+
+    width:250px;
+    height:250px;
+
+    right:8%;
+    top:15%;
+
+    animation:heroCircle 5s infinite alternate;
+}
+
+.circle2{
+
+    width:350px;
+    height:350px;
+
+    right:5%;
+    top:0;
+
+    opacity:.4;
+
+    animation:heroCircle 6s infinite alternate-reverse;
+}
+
+@keyframes heroCircle{
+
+    to{
+        transform:scale(1.15) rotate(20deg);
+    }
+}
+
+
+.hero h1{
+
+    font-size:clamp(38px,6vw,65px);
+
+    max-width:700px;
+
+    letter-spacing:-2px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.hero p{
+
+    margin-top:12px;
+
+    color:#d1d5db;
+
+    font-size:18px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.heroButton{
+
+    width:150px;
+
+    padding:13px;
+
+    margin-top:25px;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    position:relative;
+
+    z-index:2;
+}
+
+
+/* =====================================================
+   CATEGORIES
+===================================================== */
+
+.section{
+
+    padding:10px 30px 35px;
+}
+
+.title{
+
+    font-size:28px;
+
+    margin:20px 0;
+}
+
+.categories{
+
+    display:flex;
+
+    gap:12px;
+
+    overflow-x:auto;
+
+    padding-bottom:8px;
+}
+
+.category{
+
+    padding:12px 22px;
+
+    background:white;
+
+    border:1px solid #e6e7ec;
+
+    border-radius:30px;
+
+    white-space:nowrap;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.category:hover{
+
+    transform:translateY(-3px);
+
+    border-color:#8b5cf6;
+
+    box-shadow:0 8px 20px rgba(124,58,237,.12);
+}
+
+
+/* =====================================================
+   PRODUCTS
+===================================================== */
+
+.products{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+}
+
+.product{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:15px;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:
+        0 6px 25px rgba(0,0,0,.06);
+
+    transition:.3s;
+
+    overflow:hidden;
+}
+
+.product:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.14);
+}
+
+
+/* product image area */
+
+.productImage{
+
+    height:210px;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eef0ff,
+            #fafafa
+        );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+
+/* decorative glow */
+
+.productImage::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:170px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    background:#8b5cf622;
+
+    filter:blur(25px);
+}
+
+
+/* =====================================================
+   PEN DRAWING
+===================================================== */
+
+.pen{
+
+    width:34px;
+
+    height:165px;
+
+    border-radius:
+        10px
+        10px
+        7px
+        7px;
+
+    position:relative;
+
+    transform:rotate(28deg);
+
+    z-index:2;
+
+    box-shadow:
+        6px 10px 18px rgba(0,0,0,.3);
+}
+
+
+/* pen tip */
+
+.pen::after{
+
+    content:"";
+
+    position:absolute;
+
+    bottom:-23px;
+
+    left:11px;
+
+    border-left:6px solid transparent;
+
+    border-right:6px solid transparent;
+
+    border-top:25px solid #222;
+}
+
+
+/* pen clip */
+
+.pen::before{
+
+    content:"";
+
+    position:absolute;
+
+    right:-6px;
+
+    top:18px;
+
+    width:5px;
+
+    height:75px;
+
+    border-radius:5px;
+
+    background:#777;
+}
+
+
+/* V5 */
+
+.penV5{
+
+    background:
+        linear-gradient(
+            90deg,
+            #b9c1cf,
+            #ffffff,
+            #a7afbd
+        );
+}
+
+
+/* V7 */
+
+.penV7{
+
+    background:
+        linear-gradient(
+            90deg,
+            #c7ced9,
+            #ffffff,
+            #929dac
+        );
+}
+
+
+/* grip */
+
+.penGrip{
+
+    background:
+        linear-gradient(
+            90deg,
+            #888,
+            #eee,
+            #777
+        );
+}
+
+
+/* blue */
+
+.penBlue{
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #60a5fa,
+            #1d4ed8
+        );
+}
+
+
+/* black */
+
+.penBlack{
+
+    background:
+        linear-gradient(
+            90deg,
+            #111,
+            #555,
+            #111
+        );
+}
+
+
+/* pen label */
+
+.penLabel{
+
+    position:absolute;
+
+    z-index:4;
+
+    transform:rotate(28deg);
+
+    font-size:13px;
+
+    font-weight:900;
+
+    color:#111;
+
+    letter-spacing:1px;
+}
+
+
+/* product info */
+
+.productName{
+
+    margin-top:15px;
+
+    font-size:17px;
+
+    font-weight:700;
+}
+
+.rating{
+
+    margin-top:7px;
+
+    color:#f59e0b;
+
+    font-size:14px;
+}
+
+.description{
+
+    color:#777;
+
+    font-size:12px;
+
+    margin-top:6px;
+
+    min-height:30px;
+}
+
+.price{
+
+    font-size:22px;
+
+    font-weight:900;
+
+    margin-top:10px;
+}
+
+.price span{
+
+    font-size:12px;
+
+    color:#888;
+
+    font-weight:normal;
+}
+
+
+/* add cart */
+
+.addCart{
+
+    width:100%;
+
+    padding:11px;
+
+    margin-top:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#0d1018;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.addCart:hover{
+
+    background:#7c3aed;
+
+    transform:translateY(-2px);
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+
+    position:fixed;
+
+    right:22px;
+
+    bottom:22px;
+
+    padding:14px 20px;
+
+    background:#0c0e15;
+
+    color:white;
+
+    border-radius:12px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.3);
+
+    opacity:0;
+
+    transform:translateY(80px);
+
+    transition:.3s;
+
+    z-index:200;
+}
+
+.toast.show{
+
+    opacity:1;
+
+    transform:none;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    background:#090a10;
+
+    color:#858b9e;
+
+    text-align:center;
+
+    padding:35px;
+
+    margin-top:20px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .header{
+
+        padding:0 12px;
+
+        gap:10px;
+    }
+
+    .shopLogo{
+
+        font-size:18px;
+    }
+
+    .headerLink{
+
+        display:none;
+    }
+
+    .hero{
+
+        margin:12px;
+
+        padding:30px;
+
+        min-height:300px;
+    }
+
+    .section{
+
+        padding:10px 14px 30px;
+    }
+
+    .products{
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+        gap:12px;
+    }
+
+    .productImage{
+
+        height:165px;
+    }
+
+    .pen{
+
+        height:125px;
+
+        width:28px;
+    }
+
+    .productName{
+
+        font-size:14px;
+    }
+
+    .price{
+
+        font-size:18px;
+    }
+
+    .description{
+
+        font-size:11px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN PAGE
+===================================================== -->
+
+<div id="loginPage">
+
+    <div class="stars"></div>
+
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+
+    <div class="loginCard">
+
+        <div class="logo">
+            SHADOWLEVEL
+        </div>
+
+        <div class="loginSubtitle">
+            Your stationery. Your level.
+        </div>
+
+
+        <input
+            id="username"
+            class="input"
+            type="text"
+            placeholder="Username"
+        >
+
+
+        <input
+            id="password"
+            class="input"
+            type="password"
+            placeholder="Password"
+        >
+
+
+        <button
+            class="loginButton"
+            onclick="login()"
+        >
+            ENTER SHOP
+        </button>
+
+
+        <div class="demoText">
+            Demo login • Any username and password
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SHOP PAGE
+===================================================== -->
+
+<div id="shopPage">
+
+
+<header class="header">
+
+
+    <div class="shopLogo">
+        SHADOWLEVEL
+    </div>
+
+
+    <div class="search">
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Search pens, stationery..."
+            oninput="searchProducts()"
+        >
+
+        <button>
+            🔍
+        </button>
+
+    </div>
+
+
+    <div class="headerLink">
+        Account
+    </div>
+
+
+    <div class="cart">
+
+        🛒
+
+        <div
+            id="cartCount"
+            class="cartCount"
+        >
+            0
+        </div>
+
+    </div>
+
+
+</header>
+
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="heroCircle circle1"></div>
+    <div class="heroCircle circle2"></div>
+
+
+    <h1>
+        Write at your level.
+    </h1>
+
+
+    <p>
+        Premium pens and stationery for everyday writing.
+    </p>
+
+
+    <button
+        class="heroButton"
+        onclick="scrollToProducts()"
+    >
+        SHOP NOW →
+    </button>
+
+</section>
+
+
+
+<!-- CATEGORIES -->
+
+<section class="section">
+
+    <h2 class="title">
+        Shop by category
+    </h2>
+
+
+    <div class="categories">
+
+        <div class="category">
+            🖊️ Pens
+        </div>
+
+        <div class="category">
+            ✏️ Pencils
+        </div>
+
+        <div class="category">
+            📒 Notebooks
+        </div>
+
+        <div class="category">
+            📐 School Supplies
+        </div>
+
+        <div class="category">
+            🎨 Art Supplies
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- PRODUCTS -->
+
+<section
+    class="section"
+    id="productsSection"
+>
+
+
+<h2 class="title">
+    Popular Products
+</h2>
+
+
+<div
+    class="products"
+    id="products"
+>
+
+
+<!-- V5 -->
+
+<div class="product">
+
+    <div class="productImage">
+
+        <div class="pen penV5"></div>
+
+        <div class="penLabel">
+            V5
+        </div>
+
+    </div>
+
+
+    <div class="productName">
+        Pilot V5 Hi-Tecpoint
+    </div>
+
+
+    <div class="rating">
+        ★★★★★
+    </div>
+
+
+    <div class="description">
+        Smooth rollerball writing pen
+    </div>
+
+
+    <div class="price">
+        ₹50 <span>each</span>
+    </div>
+
+
+    <button
+        class="addCart"
+        onclick="addToCart('Pilot V5')"
+    >
+        Add to Cart
+    </button>
+
+</div>
+
+
+
+<!-- V7 -->
+
+<div class="product">
+
+    <div class="productImage">
+
+        <div class="pen penV7"></div>
+
+        <div class="penLabel">
+            V7
+        </div>
+
+    </div>
+
+
+    <div class="productName">
+        Pilot V7 Hi-Tecpoint
+    </div>
+
+
+    <div class="rating">
+        ★★★★★
+    </div>
+
+
+    <div class="description">
+        Fine liquid ink rollerball pen
+    </div>
+
+
+    <div class="price">
+        ₹60 <span>each</span>
+    </div>
+
+
+    <button
+        class="addCart"
+        onclick="addToCart('Pilot V7')"
+    >
+        Add to Cart
+    </button>
+
+</div>
+
+
+
+<!-- V5 GRIP -->
+
+<div class="product">
+
+    <div class="productImage">
+
+        <div class="pen penGrip"></div>
+
+        <div class="penLabel">
+            V5
+        </div>
+
+    </div>
+
+
+    <div class="productName">
+        Pilot V5 Grip
+    </div>
+
+
+    <div class="rating">
+        ★★★★☆
+    </div>
+
+
+    <div class="description">
+        Comfortable grip rollerball pen
+    </div>
+
+
+    <div class="price">
+        ₹70 <span>each</span>
+    </div>
+
+
+    <button
+        class="addCart"
+        onclick="addToCart('Pilot V5 Grip')"
+    >
+        Add to Cart
+    </button>
+
+</div>
+
+
+
+<!-- V7 GRIP -->
+
+<div class="product">
+
+    <div class="productImage">
+
+        <div class="pen penGrip"></div>
+
+        <div class="penLabel">
+            V7
+        </div>
+
+    </div>
+
+
+    <div class="productName">
+        Pilot V7 Grip
+    </div>
+
+
+    <div class="rating">
+        ★★★★★
+    </div>
+
+
+    <div class="description">
+        Smooth writing with ergonomic grip
+    </div>
+
+
+    <div class="price">
+        ₹80 <span>each</span>
+    </div>
+
+
+    <button
+        class="addCart"
+        onclick="addToCart('Pilot V7 Grip')"
+    >
+        Add to Cart
+    </button>
+
+</div>
+
+
+
+<!-- BLUE PEN -->
+
+<div class="product">
+
+    <div class="productImage">
+
+        <div class="pen penBlue"></div>
+
+        <div class="penLabel">
+            BLUE
+        </div>
+
+    </div>
+
+
+    <div class="productName">
+        Shadow Blue Gel Pen
+    </div>
+
+
+    <div class="rating">
+        ★★★★☆
+    </div>
+
+
+    <div class="description">
+        Smooth everyday gel writing
+    </div>
+
+
+    <div class="price">
+        ₹25 <span>each</span>
+    </div>
+
+
+    <button
+        class="addCart"
+        onclick="addToCart('Shadow Blue Gel Pen')"
+    >
+        Add to Cart
+    </button>
+
+</div>
+
+
+
+<!-- BLACK PEN -->
+
+<div class="product">
+
+    <div class="productImage">
+
+        <div class="pen penBlack"></div>
+
+        <div class="penLabel">
+            BLACK
+        </div>
+
+    </div>
+
+
+    <div class="productName">
+        Shadow Black Gel Pen
+    </div>
+
+
+    <div class="rating">
+        ★★★★★
+    </div>
+
+
+    <div class="description">
+        Deep black ink for clean notes
+    </div>
+
+
+    <div class="price">
+        ₹25 <span>each</span>
+    </div>
+
+
+    <button
+        class="addCart"
+        onclick="addToCart('Shadow Black Gel Pen')"
+    >
+        Add to Cart
+    </button>
+
+</div>
+
+
+
+<!-- NOTEBOOK -->
+
+<div class="product">
+
+    <div class="productImage">
+
+        <div
+            style="
+            width:120px;
+            height:155px;
+            background:#111827;
+            border-radius:6px;
+            transform:rotate(-5deg);
+            box-shadow:8px 10px 18px #0003;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:#a78bfa;
+            font-weight:900;
+            letter-spacing:2px;
+            "
+        >
+            SHADOW
+        </div>
+
+    </div>
+
+
+    <div class="productName">
+        ShadowLevel Premium Notebook
+    </div>
+
+
+    <div class="rating">
+        ★★★★★
+    </div>
+
+
+    <div class="description">
+        Premium ruled notebook
+    </div>
+
+
+    <div class="price">
+        ₹149 <span>each</span>
+    </div>
+
+
+    <button
+        class="addCart"
+        onclick="addToCart('ShadowLevel Notebook')"
+    >
+        Add to Cart
+    </button>
+
+</div>
+
+
+
+<!-- PENCIL -->
+
+<div class="product">
+
+    <div class="productImage">
+
+        <div
+            style="
+            width:175px;
+            height:24px;
+            border-radius:12px;
+            background:linear-gradient(90deg,#e6b566,#f7d28c,#d9a95d);
+            transform:rotate(-25deg);
+            box-shadow:5px 8px 15px #0003;
+            "
+        ></div>
+
+    </div>
+
+
+    <div class="productName">
+        Shadow HB Pencil Pack
+    </div>
+
+
+    <div class="rating">
+        ★★★★☆
+    </div>
+
+
+    <div class="description">
+        Smooth HB pencils for school
+    </div>
+
+
+    <div class="price">
+        ₹99 <span>pack</span>
+    </div>
+
+
+    <button
+        class="addCart"
+        onclick="addToCart('Shadow HB Pencil Pack')"
+    >
+        Add to Cart
+    </button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<footer>
+
+    © 2026 ShadowLevel
+
+    <br><br>
+
+    Your stationery. Your level.
+
+</footer>
+
+
+</div>
+
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast"
+>
+    Added to cart ✓
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function login(){
+
+    let username =
+        document.getElementById("username").value.trim();
+
+    let password =
+        document.getElementById("password").value.trim();
+
+
+    if(
+        username === "" ||
+        password === ""
+    ){
+
+        alert(
+            "Please enter username and password."
+        );
+
+        return;
+    }
+
+
+    let loginPage =
+        document.getElementById("loginPage");
+
+    let shopPage =
+        document.getElementById("shopPage");
+
+
+    loginPage.style.transition =
+        "1s ease";
+
+    loginPage.style.opacity =
+        "0";
+
+    loginPage.style.transform =
+        "scale(1.08)";
+
+
+    setTimeout(function(){
+
+        loginPage.style.display =
+            "none";
+
+        shopPage.style.display =
+            "block";
+
+        window.scrollTo(0,0);
+
+    },800);
+
+}
+
+
+/* =====================================================
+   CART
+===================================================== */
+
+let cart = 0;
+
+
+function addToCart(productName){
+
+    cart++;
+
+
+    document.getElementById(
+        "cartCount"
+    ).innerText = cart;
+
+
+    let toast =
+        document.getElementById("toast");
+
+
+    toast.innerText =
+        productName + " added to cart ✓";
+
+
+    toast.classList.add("show");
+
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },1800);
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+function searchProducts(){
+
+    let query =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+
+    let products =
+        document.querySelectorAll(".product");
+
+
+    products.forEach(function(product){
+
+        let name =
+            product
+            .querySelector(".productName")
+            .innerText
+            .toLowerCase();
+
+
+        if(
+            name.includes(query)
+        ){
+
+            product.style.display =
+                "block";
+
+        }else{
+
+            product.style.display =
+                "none";
+
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   SHOP NOW
+===================================================== */
+
+function scrollToProducts(){
+
+    document
+    .getElementById("productsSection")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+</script>
+
+
+</body>
+</html>
